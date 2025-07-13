@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Encode / Decode Tool</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Encode / Decode Tool</h1>
+      <!-- Theme toggle button -->
+      <button id="themeToggle">🌙 Toggle Theme</button>
+    </header>
+
+    <main>
+      <textarea
+        id="input"
+        placeholder="Enter text or encoded string..."
+      ></textarea>
+
+      <div class="options">
+        <select id="mode">
+          <option value="base64">Base64</option>
+          <option value="hex">Hex</option>
+          <option value="url">URL</option>
+          <option value="html">HTML Entities</option>
+        </select>
+        <button id="encodeBtn">Encode</button>
+        <button id="decodeBtn">Decode</button>
+      </div>
+
+      <textarea
+        id="output"
+        placeholder="Result will appear here..."
+        readonly
+      ></textarea>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
