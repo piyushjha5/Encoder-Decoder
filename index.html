@@ -2,39 +2,153 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Encode / Decode Tool</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
   </head>
   <body>
-    <header>
-      <h1>Encode / Decode Tool</h1>
-      <!-- Theme toggle button -->
-      <button id="themeToggle">🌙 Toggle Theme</button>
-    </header>
-
-    <main>
-      <textarea
-        id="input"
-        placeholder="Enter text or encoded string..."
-      ></textarea>
-
-      <div class="options">
-        <select id="mode">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <h1>🔐 Encode / Decode</h1>
+      </div>
+      <div class="toolbar-center">
+        <select id="mode" aria-label="Encoding mode">
           <option value="base64">Base64</option>
           <option value="hex">Hex</option>
           <option value="url">URL</option>
           <option value="html">HTML Entities</option>
+          <option value="binary">Binary</option>
+          <option value="rot13">ROT13</option>
         </select>
-        <button id="encodeBtn">Encode</button>
-        <button id="decodeBtn">Decode</button>
+        <button
+          class="btn-swap"
+          id="swapBtn"
+          aria-label="Swap input and output"
+        >
+          ⇄ Swap
+        </button>
+        <button class="btn-primary" id="encodeBtn">▶ Encode</button>
+        <button class="btn-primary" id="decodeBtn">◀ Decode</button>
+        <button class="btn-secondary" id="clearBtn">✕ Clear</button>
+      </div>
+      <div class="toolbar-right">
+        <button id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+
+    <main>
+      <div class="panel">
+        <div class="panel-header">
+          <label for="input">Input</label>
+          <div class="panel-actions">
+            <span class="char-count" id="inputCount">0 characters</span>
+            <button
+              class="btn-copy"
+              id="inputCopyBtn"
+              aria-label="Copy input"
+              title="Copy"
+            >
+              <svg
+                class="copy-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+              <svg
+                class="check-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                style="display: none"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="text-area-wrapper">
+          <textarea
+            id="input"
+            placeholder="Enter text or encoded string..."
+            aria-label="Input text"
+          ></textarea>
+          <div
+            class="json-tree-view"
+            id="inputTree"
+            style="display: none"
+          ></div>
+        </div>
       </div>
 
-      <textarea
-        id="output"
-        placeholder="Result will appear here..."
-        readonly
-      ></textarea>
+      <div class="panel">
+        <div class="panel-header">
+          <label for="output">Output</label>
+          <div class="panel-actions">
+            <span class="char-count" id="outputCount">0 characters</span>
+            <button
+              class="btn-copy"
+              id="outputCopyBtn"
+              aria-label="Copy output"
+              title="Copy"
+            >
+              <svg
+                class="copy-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+              <svg
+                class="check-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                style="display: none"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="text-area-wrapper">
+          <textarea
+            id="output"
+            placeholder="Result will appear here..."
+            readonly
+            aria-label="Output text"
+          ></textarea>
+          <div
+            class="json-tree-view"
+            id="outputTree"
+            style="display: none"
+          ></div>
+        </div>
+      </div>
     </main>
+
+    <div class="toast" id="toast">Copied to clipboard!</div>
 
     <script src="script.js"></script>
   </body>
