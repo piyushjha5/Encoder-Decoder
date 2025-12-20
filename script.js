@@ -322,15 +322,45 @@ inputEl.addEventListener("blur", () => {
   }
 });
 
-// Click on tree view to edit
-inputTree.addEventListener("click", () => {
+// Render JSON when output loses focus (and restore readonly)
+outputEl.addEventListener("blur", () => {
+  if (isValidJson(outputEl.value)) {
+    const json = JSON.parse(outputEl.value);
+    outputTree.innerHTML = createJsonTree(json);
+    outputTree.style.display = "block";
+    outputEl.classList.add("hidden");
+    outputEl.setAttribute("readonly", true);
+  } else {
+    // If not JSON, just make it readonly again
+    outputEl.setAttribute("readonly", true);
+  }
+});
+
+// Click on tree view to edit (except on arrow clicks)
+inputTree.addEventListener("click", (e) => {
+  // Don't switch to edit mode if clicking on an arrow
+  if (
+    e.target.classList.contains("json-arrow") ||
+    e.target.closest(".json-arrow")
+  ) {
+    return;
+  }
+
   inputTree.style.display = "none";
   inputTree.innerHTML = "";
   inputEl.classList.remove("hidden");
   inputEl.focus();
 });
 
-outputTree.addEventListener("click", () => {
+outputTree.addEventListener("click", (e) => {
+  // Don't switch to edit mode if clicking on an arrow
+  if (
+    e.target.classList.contains("json-arrow") ||
+    e.target.closest(".json-arrow")
+  ) {
+    return;
+  }
+
   outputTree.style.display = "none";
   outputTree.innerHTML = "";
   outputEl.classList.remove("hidden");
